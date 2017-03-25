@@ -1,0 +1,15 @@
+{
+  "name": "number_guessing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gameMain.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jasmine": "^2.5.3",
+    "readline-sync": "^1.4.7"
+  }
+}
