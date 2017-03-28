@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>统一建模语言理论测试</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<div class="">
+
+</div>
+<hr/>
+<div class="paper-name">
+
+</div>
+<div class="person-info">
+    <span>考试科目：<b><u>统一建模语言 UML</u></b></span>
+    <span>时间： <b><u>100 分钟</u></b></span>
+    <span>得分：<u><span id="score">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></u></span>
+    <br>
+    <span>班 级：</span><input type="text" name="classNo">
+    <span>学号：</span><input type="text" name="no">
+    <span>姓名：</span><input type="text" name="name">
+</div>
+<div class="problem">
+    <div class="problem-fillin">
+        <div class="title"></div>
+        <ol class="problem"></ol>
+    </div>
+    <div class="problem-choice">
+        <div class="title"></div>
+        <ol class="problem"></ol>
+    </div>
+    <div class="problem-multi-choice">
+        <div class="title"></div>
+        <ol class="problem"></ol>
+    </div>
+    <div class="problem-true-false">
+        <div class="title"></div>
+        <ol class="problem"></ol>
+    </div>
+    <div class="problem-question">
+        <div class="title"></div>
+        <ol class="problem"></ol>
+    </div>
+</div>
+<input type="button" id="submit" value="提交">
+<div class="pager">
+    <hr>
+    <p>1 / 1</p>
+</div>
+<script src="js/problem.js"></script>
+<script src="js/problemLoader.js"></script>
+<script src="js/checkPaper.js"></script>
+<script>
+    loadProblem(problems);
+
+    function getUserAnswer() {
+        let result = {"填空题": [], "选择题": [], "多选题": [], "判断题": [], "简答题": []};
+        let problemClassesSelector = ['.problem-fillin input', '.problem-choice input', '.problem-multi-choice input', '.problem-true-false input', '.problem-question textarea'];
+        problemClassesSelector.forEach((problemClassSelector, index) => {
+            let ansDomArray = document.querySelectorAll(problemClassSelector);
+            ansDomArray = Array.prototype.slice.call(ansDomArray);//NodeList to Array
+            result[Object.keys(result)[index]] = inputDom2Data(ansDomArray);
+        });
+        return result;
+    }
+
+    function inputDom2Data(inputDom) {
+        let ans = [];
+        switch (inputDom[0].type) {
+            case "radio":
+            case "checkbox"://checked
+                names = [];
+                inputDom.forEach(dom=> {
+                    if (names.indexOf(dom.name) === -1) {
+                        names.push(dom.name);
+                    }
+                });
+                names.forEach(name=> {
+                    let choice = [];
+                    inputDom.filter(dom=> {
+                        return dom.name === name;
+                    }).forEach((dom, index)=> {
+                        if (dom.checked) {
+                            choice.push(index);
+                        }
+                    });
+                    ans.push({"id": name, "answer": choice});
+                });
+                break;
+            case "text"://value
+            case "textarea":
+                inputDom.forEach(dom=> {
+                    ans.push({"id": dom.name, "answer": dom.value});
+                });
+                break;
+        }
+        return ans;
+    }
+
+    document.querySelector("#submit").addEventListener("click", ()=> {
+        let domScore = document.querySelector("#score");
+        domScore.innerText = checkPaper(getUserAnswer());
+    })
+</script>
+</body>
+</html>

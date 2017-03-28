@@ -1,0 +1,11 @@
+.title {
+    font-weight: 900;
+}
+
+.problem-choice li span:first-child, .problem-multi-choice li span:first-child {
+    display: block;
+}
+
+textarea {
+    display: block;
+}
