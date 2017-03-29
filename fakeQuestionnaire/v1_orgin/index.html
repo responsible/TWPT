@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FakeQuestionnaire</title>
+    <link rel="stylesheet" href="bower_components/jquery-ui/themes/base/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+<button class="ui-button ui-widget ui-corner-all" id="mode">preview</button>
+<div id="container">
+
+</div>
+<button class="ui-button ui-widget ui-corner-all" id="addWidget">+</button>
+
+<script type="application/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+<script type="application/javascript" src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+<script type="application/javascript" src="js/model/widget.js"></script>
+<script type="application/javascript" src="js/controller.js"></script>
+<script>
+    document.querySelector("#addWidget").addEventListener("click", addWidget);
+    document.querySelector("#mode").addEventListener("click", changeEditable);
+</script>
+<script type="application/javascript" src="js/view.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "fakeQuestionnaire",
+  "homepage": "https://github.com/responsible/TWPT/tree/master/paperCheck",
+  "authors": [
+    "Responsible <responsible01@yeah.net>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery-ui": "jqueryui#^1.12.1",
+    "jquery": "^3.2.1"
+  }
+}
