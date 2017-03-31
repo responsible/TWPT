@@ -1,24 +1,28 @@
 var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
-  entry: './index.js',
+  entry: [
+    'webpack-hot-middleware/client',
+    './index.js'
+  ],
   output: {
-    path: path.join(__dirname, '/dist'),
-    filename: 'index.js'
+    path: path.join(__dirname, 'dist'),
+    filename: 'index.js',
+    publicPath: '/static/'
   },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ],
   resolve: {
     extensions: ['.js', '.jsx']
   },
-  // plugins: ["react-hot-loader/babel"],
   module: {
     loaders: [
       {
         test: /\.js|jsx$/,
-        loaders: 'babel-loader',
-        exclude: /node_modules/,
-        query: {
-          presets: ['react']
-        }
+        loaders: ['react-hot-loader', 'babel-loader?presets[]=react,presets[]=es2015'],
+        exclude: /node_modules/
       }
     ]
   }
